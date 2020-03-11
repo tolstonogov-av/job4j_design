@@ -28,7 +28,7 @@ public class ReportEngineItJson implements ReportView {
         for (Employee employee : store.findBy(filter)) {
             text.append(row(employee));
         }
-        text.deleteCharAt(text.length() - 3);
+        text.deleteCharAt(text.lastIndexOf(","));
         text.append(end());
         return text.toString();
     }
