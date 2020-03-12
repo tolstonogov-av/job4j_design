@@ -11,7 +11,7 @@ public class ReportEngineItXml implements ReportView {
     /**
      * Store with employees's data.
      */
-    private Store store;
+    private final Store store;
 
     /**
      * Constructor, that fills the store.
@@ -33,31 +33,28 @@ public class ReportEngineItXml implements ReportView {
     }
 
     public String start() {
-        return new StringBuilder()
-                .append("<?xml version=\"1.0\" encoding=\"WINDOWS-1251\"?>").append(System.lineSeparator())
-                .append("<employees>").append(System.lineSeparator()).toString();
+        return "<?xml version=\"1.0\" encoding=\"WINDOWS-1251\"?>" + System.lineSeparator() +
+                "<employees>" + System.lineSeparator();
     }
 
     public String row(Employee employee) {
-        return new StringBuilder()
-                .append("<employee>").append(System.lineSeparator())
-                .append("<Name>").append(System.lineSeparator())
-                .append(employee.getName()).append(System.lineSeparator())
-                .append("</Name>").append(System.lineSeparator())
-                .append("<Hired>").append(System.lineSeparator())
-                .append(employee.getHired().getTime()).append(System.lineSeparator())
-                .append("</Hired>").append(System.lineSeparator())
-                .append("<Fired>").append(System.lineSeparator())
-                .append(employee.getFired() == null ? "-" : employee.getFired().getTime()).append(System.lineSeparator())
-                .append("</Fired>").append(System.lineSeparator())
-                .append("<Salary>").append(System.lineSeparator())
-                .append(employee.getSalary()).append(System.lineSeparator())
-                .append("</Salary>").append(System.lineSeparator())
-                .append("</employee>").append(System.lineSeparator()).toString();
+        return "<employee>" + System.lineSeparator() +
+                "<Name>" + System.lineSeparator() +
+                employee.getName() + System.lineSeparator() +
+                "</Name>" + System.lineSeparator() +
+                "<Hired>" + System.lineSeparator() +
+                employee.getHired().getTime() + System.lineSeparator() +
+                "</Hired>" + System.lineSeparator() +
+                "<Fired>" + System.lineSeparator() +
+                (employee.getFired() == null ? "-" : employee.getFired().getTime()) + System.lineSeparator() +
+                "</Fired>" + System.lineSeparator() +
+                "<Salary>" + System.lineSeparator() +
+                employee.getSalary() + System.lineSeparator() +
+                "</Salary>" + System.lineSeparator() +
+                "</employee>" + System.lineSeparator();
     }
 
     public String end() {
-        return new StringBuilder()
-                .append("</employees>").append(System.lineSeparator()).toString();
+        return "</employees>" + System.lineSeparator();
     }
 }

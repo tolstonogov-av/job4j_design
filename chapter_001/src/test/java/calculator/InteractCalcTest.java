@@ -3,8 +3,7 @@ package calculator;
 import java.util.List;
 
 import org.junit.Test;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Class to test class InteractCalc.
@@ -17,40 +16,40 @@ public class InteractCalcTest {
      * 2 + 3 = 5
      */
     @Test
-    public void whenAddThenReturnSum() {
+    public void sum() {
         InteractCalc ic = new InteractCalc(new StubInput(List.of("2", "3", "+", "e")));
         ic.calculate();
-        assertThat(ic.getResult(), is(5d));
+        assertEquals(5d, ic.getResult(), 0.001);
     }
 
     /**
      * 2 * (-3) = -6
      */
     @Test
-    public void whenMultiplyThenReturnMultiply() {
+    public void multiply() {
         InteractCalc ic = new InteractCalc(new StubInput(List.of("2", "-3", "*", "e")));
         ic.calculate();
-        assertThat(ic.getResult(), is(-6d));
+        assertEquals(-6d, ic.getResult(), 0.001);
     }
 
     /**
      * 24 - 3 = 21
      */
     @Test
-    public void whenSubtractThenReturnSubtract() {
+    public void subtract() {
         InteractCalc ic = new InteractCalc(new StubInput(List.of("24", "3", "-", "e")));
         ic.calculate();
-        assertThat(ic.getResult(), is(21d));
+        assertEquals(21d, ic.getResult(), 0.001);
     }
 
     /**
      * 24 / 3 = 8
      */
     @Test
-    public void whenDivThenReturnDiv() {
+    public void div() {
         InteractCalc ic = new InteractCalc(new StubInput(List.of("24", "3", "/", "e")));
         ic.calculate();
-        assertThat(ic.getResult(), is(8d));
+        assertEquals(8d, ic.getResult(), 0.001);
     }
 
     /**
@@ -58,9 +57,9 @@ public class InteractCalcTest {
      * 5 + 5 = 10
      */
     @Test
-    public void whenUsedMThenRGetPreviousResult() {
+    public void usePeviousResult() {
         InteractCalc ic = new InteractCalc(new StubInput(List.of("2", "3", "+", "m", "m", "+", "e")));
         ic.calculate();
-        assertThat(ic.getResult(), is(10d));
+        assertEquals(10d, ic.getResult(), 0.001);
     }
 }

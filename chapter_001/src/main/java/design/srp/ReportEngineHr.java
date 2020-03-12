@@ -1,6 +1,5 @@
 package design.srp;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -13,7 +12,7 @@ public class ReportEngineHr implements ReportView {
     /**
      * Store with employees's data.
      */
-    private Store store;
+    private final Store store;
 
     /**
      * Constructor, that fills the store.
@@ -28,12 +27,7 @@ public class ReportEngineHr implements ReportView {
         StringBuilder text = new StringBuilder();
         text.append(start());
         List<Employee> employees = store.findBy(filter);
-        employees.sort(new Comparator<>() {
-            @Override
-            public int compare(Employee o1, Employee o2) {
-                return (int) (o2.getSalary() - o1.getSalary());
-            }
-        });
+        employees.sort((o1, o2) -> (int) (o2.getSalary() - o1.getSalary()));
         for (Employee employee : employees) {
             text.append(row(employee));
         }
@@ -41,14 +35,12 @@ public class ReportEngineHr implements ReportView {
     }
 
     public String start() {
-        return new StringBuilder()
-                .append("Name; Salary;").append(System.lineSeparator()).toString();
+        return "Name; Salary;" + System.lineSeparator();
     }
 
     public String row(Employee employee) {
-        return new StringBuilder()
-                .append(employee.getName()).append(";")
-                .append(employee.getSalary()).append(";").append(System.lineSeparator()).toString();
+        return employee.getName() + ";" +
+                employee.getSalary() + ";" + System.lineSeparator();
     }
 
     public String end() {

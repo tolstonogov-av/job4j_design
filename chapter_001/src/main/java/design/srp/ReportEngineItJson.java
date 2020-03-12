@@ -11,7 +11,7 @@ public class ReportEngineItJson implements ReportView {
     /**
      * Store with employees's data.
      */
-    private Store store;
+    private final Store store;
 
     /**
      * Constructor, that fills the store.
@@ -34,30 +34,27 @@ public class ReportEngineItJson implements ReportView {
     }
 
     public String start() {
-        return new StringBuilder()
-                .append('{').append(System.lineSeparator())
-                .append("\"employees\":[").append(System.lineSeparator()).toString();
+        return '{' + System.lineSeparator() +
+                "\"employees\":[" + System.lineSeparator();
     }
 
     public String row(Employee employee) {
-        return new StringBuilder()
-                .append('{').append(System.lineSeparator())
-                .append("\"Name\":")
-                .append('"').append(employee.getName()).append('"')
-                .append(',').append(System.lineSeparator())
-                .append("\"Hired\":")
-                .append('"').append(employee.getHired().getTime()).append('"')
-                .append(',').append(System.lineSeparator())
-                .append("\"Fired\":")
-                .append('"').append(employee.getFired() == null ? '-' : employee.getFired().getTime()).append('"')
-                .append(',').append(System.lineSeparator())
-                .append("\"Salary\":").append(employee.getSalary()).append(System.lineSeparator())
-                .append("},").append(System.lineSeparator()).toString();
+        return '{' + System.lineSeparator() +
+                "\"Name\":" +
+                '"' + employee.getName() + '"' +
+                ',' + System.lineSeparator() +
+                "\"Hired\":" +
+                '"' + employee.getHired().getTime() + '"' +
+                ',' + System.lineSeparator() +
+                "\"Fired\":" +
+                '"' + (employee.getFired() == null ? '-' : employee.getFired().getTime()) + '"' +
+                ',' + System.lineSeparator() +
+                "\"Salary\":" + employee.getSalary() + System.lineSeparator() +
+                "}," + System.lineSeparator();
     }
 
     public String end() {
-        return new StringBuilder()
-                .append(']').append(System.lineSeparator())
-                .append('}').append(System.lineSeparator()).toString();
+        return ']' + System.lineSeparator() +
+                '}' + System.lineSeparator();
     }
 }

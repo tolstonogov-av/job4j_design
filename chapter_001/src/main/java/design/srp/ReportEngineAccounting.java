@@ -11,7 +11,7 @@ public class ReportEngineAccounting implements ReportView {
     /**
      * Store with employees's data.
      */
-    private Store store;
+    private final Store store;
 
     /**
      * Constructor, that fills the store.
@@ -32,16 +32,14 @@ public class ReportEngineAccounting implements ReportView {
     }
 
     public String start() {
-        return new StringBuilder()
-                .append("Name; Hired; Fired; Salary;").append(System.lineSeparator()).toString();
+        return "Name; Hired; Fired; Salary;" + System.lineSeparator();
     }
 
     public String row(Employee employee) {
-        return new StringBuilder()
-                .append(employee.getName()).append(";")
-                .append(employee.getHired().getTime()).append(";")
-                .append(employee.getFired() == null ? "-" : employee.getFired().getTime()).append(";")
-                .append(employee.getSalary()).append(" rubles;").append(System.lineSeparator()).toString();
+        return employee.getName() + ";" +
+                employee.getHired().getTime() + ";" +
+                (employee.getFired() == null ? "-" : employee.getFired().getTime()) + ";" +
+                employee.getSalary() + " rubles;" + System.lineSeparator();
     }
 
     public String end() {

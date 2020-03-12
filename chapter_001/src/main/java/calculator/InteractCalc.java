@@ -45,7 +45,7 @@ public class InteractCalc {
     /**
      * Object, realized the input of values.
      */
-    private Input input;
+    private final Input input;
 
     /**
      * Constructor.
@@ -154,8 +154,7 @@ public class InteractCalc {
      * @return entered operation
      */
     private String inputOperation() {
-       String operation = input.ask("Enter the operation (+, -, /, *, E): ").toUpperCase();
-       return operation;
+       return input.ask("Enter the operation (+, -, /, *, E): ").toUpperCase();
     }
 
     /**
