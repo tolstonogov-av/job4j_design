@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.*;
 import java.util.function.Predicate;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Class to test class ReportEngine.
@@ -90,7 +90,7 @@ public class ReportEngineTest {
                 + employee1.getSalary() + ";" + System.lineSeparator()
                 + employee3.getName() + ";"
                 + employee3.getSalary() + ";" + System.lineSeparator();
-        Assert.assertEquals(expected, report);
+        assertEquals(expected, report);
     }
 
     /**
@@ -113,7 +113,7 @@ public class ReportEngineTest {
                 + employee3.getHired().getTime() + ";"
                 + (employee3.getFired() == null ? "-" : employee3.getFired().getTime()) + ";"
                 + employee3.getSalary() + " rubles;" + System.lineSeparator();
-        Assert.assertEquals(expected, report);
+        assertEquals(expected, report);
     }
 
     /**
@@ -142,7 +142,7 @@ public class ReportEngineTest {
                 + employee3.getSalary() + ";" + System.lineSeparator()
                 + "</body>" + System.lineSeparator()
                 + "</html>" + System.lineSeparator();
-        Assert.assertEquals(expected, report);
+        assertEquals(expected, report);
     }
 
     /**
@@ -192,7 +192,7 @@ public class ReportEngineTest {
                 + "}" + System.lineSeparator()
                 + ']' + System.lineSeparator()
                 + '}' + System.lineSeparator();
-        Assert.assertEquals(expected, report);
+        assertEquals(expected, report);
     }
 
 
@@ -248,6 +248,6 @@ public class ReportEngineTest {
                 + "</Salary>" + System.lineSeparator()
                 + "</employee>" + System.lineSeparator()
                 + "</employees>" + System.lineSeparator();
-        Assert.assertEquals(expected, report);
+        assertEquals(expected, report);
     }
 }
