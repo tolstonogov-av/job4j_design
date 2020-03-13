@@ -19,7 +19,7 @@ public class InteractCalcTest {
     public void sum() {
         InteractCalc ic = new InteractCalc(new StubInput(List.of("2", "3", "+", "e")));
         ic.calculate();
-        Assert. assertEquals(5d, ic.getResult(), 0.001);
+        Assert.assertEquals(5d, ic.getResult(), 0.001);
     }
 
     /**
