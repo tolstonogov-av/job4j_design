@@ -3,7 +3,7 @@ package calculator;
 import java.util.List;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import org.junit.Assert;
 
 /**
  * Class to test class InteractCalc.
@@ -19,7 +19,7 @@ public class InteractCalcTest {
     public void sum() {
         InteractCalc ic = new InteractCalc(new StubInput(List.of("2", "3", "+", "e")));
         ic.calculate();
-        assertEquals(5d, ic.getResult(), 0.001);
+        Assert. assertEquals(5d, ic.getResult(), 0.001);
     }
 
     /**
@@ -29,7 +29,7 @@ public class InteractCalcTest {
     public void multiply() {
         InteractCalc ic = new InteractCalc(new StubInput(List.of("2", "-3", "*", "e")));
         ic.calculate();
-        assertEquals(-6d, ic.getResult(), 0.001);
+        Assert.assertEquals(-6d, ic.getResult(), 0.001);
     }
 
     /**
@@ -39,7 +39,7 @@ public class InteractCalcTest {
     public void subtract() {
         InteractCalc ic = new InteractCalc(new StubInput(List.of("24", "3", "-", "e")));
         ic.calculate();
-        assertEquals(21d, ic.getResult(), 0.001);
+        Assert.assertEquals(21d, ic.getResult(), 0.001);
     }
 
     /**
@@ -49,7 +49,7 @@ public class InteractCalcTest {
     public void div() {
         InteractCalc ic = new InteractCalc(new StubInput(List.of("24", "3", "/", "e")));
         ic.calculate();
-        assertEquals(8d, ic.getResult(), 0.001);
+        Assert.assertEquals(8d, ic.getResult(), 0.001);
     }
 
     /**
@@ -60,6 +60,6 @@ public class InteractCalcTest {
     public void usePeviousResult() {
         InteractCalc ic = new InteractCalc(new StubInput(List.of("2", "3", "+", "m", "m", "+", "e")));
         ic.calculate();
-        assertEquals(10d, ic.getResult(), 0.001);
+        Assert.assertEquals(10d, ic.getResult(), 0.001);
     }
 }

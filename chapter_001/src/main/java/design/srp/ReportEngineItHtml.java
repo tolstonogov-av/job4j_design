@@ -33,22 +33,22 @@ public class ReportEngineItHtml implements ReportView {
     }
 
     public String start() {
-        return "<html>" + System.lineSeparator() +
-                "<head>" + System.lineSeparator() +
-                "Name; Hired; Fired; Salary;" + System.lineSeparator() +
-                "</head>" + System.lineSeparator() +
-                "<body>" + System.lineSeparator();
+        return "<html>" + System.lineSeparator()
+                + "<head>" + System.lineSeparator()
+                + "Name; Hired; Fired; Salary;" + System.lineSeparator()
+                + "</head>" + System.lineSeparator()
+                + "<body>" + System.lineSeparator();
     }
 
     public String row(Employee employee) {
-        return employee.getName() + ";" +
-                employee.getHired().getTime() + ";" +
-                (employee.getFired() == null ? "-" : employee.getFired().getTime()) + ";" +
-                employee.getSalary() + ";" + System.lineSeparator();
+        return employee.getName() + ";"
+                + employee.getHired().getTime() + ";"
+                + (employee.getFired() == null ? "-" : employee.getFired().getTime()) + ";"
+                + employee.getSalary() + ";" + System.lineSeparator();
     }
 
     public String end() {
-        return "</body>" + System.lineSeparator() +
-                "</html>" + System.lineSeparator();
+        return "</body>" + System.lineSeparator()
+                + "</html>" + System.lineSeparator();
     }
 }

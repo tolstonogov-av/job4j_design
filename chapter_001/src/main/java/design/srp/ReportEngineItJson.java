@@ -34,27 +34,27 @@ public class ReportEngineItJson implements ReportView {
     }
 
     public String start() {
-        return '{' + System.lineSeparator() +
-                "\"employees\":[" + System.lineSeparator();
+        return '{' + System.lineSeparator()
+                + "\"employees\":[" + System.lineSeparator();
     }
 
     public String row(Employee employee) {
-        return '{' + System.lineSeparator() +
-                "\"Name\":" +
-                '"' + employee.getName() + '"' +
-                ',' + System.lineSeparator() +
-                "\"Hired\":" +
-                '"' + employee.getHired().getTime() + '"' +
-                ',' + System.lineSeparator() +
-                "\"Fired\":" +
-                '"' + (employee.getFired() == null ? '-' : employee.getFired().getTime()) + '"' +
-                ',' + System.lineSeparator() +
-                "\"Salary\":" + employee.getSalary() + System.lineSeparator() +
-                "}," + System.lineSeparator();
+        return '{' + System.lineSeparator()
+                + "\"Name\":"
+                + '"' + employee.getName() + '"'
+                + ',' + System.lineSeparator()
+                + "\"Hired\":"
+                + '"' + employee.getHired().getTime() + '"'
+                + ',' + System.lineSeparator()
+                + "\"Fired\":"
+                + '"' + (employee.getFired() == null ? '-' : employee.getFired().getTime()) + '"'
+                + ',' + System.lineSeparator()
+                + "\"Salary\":" + employee.getSalary() + System.lineSeparator()
+                + "}," + System.lineSeparator();
     }
 
     public String end() {
-        return ']' + System.lineSeparator() +
-                '}' + System.lineSeparator();
+        return ']' + System.lineSeparator()
+                + '}' + System.lineSeparator();
     }
 }

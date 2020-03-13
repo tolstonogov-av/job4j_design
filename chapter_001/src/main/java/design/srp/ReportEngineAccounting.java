@@ -36,10 +36,10 @@ public class ReportEngineAccounting implements ReportView {
     }
 
     public String row(Employee employee) {
-        return employee.getName() + ";" +
-                employee.getHired().getTime() + ";" +
-                (employee.getFired() == null ? "-" : employee.getFired().getTime()) + ";" +
-                employee.getSalary() + " rubles;" + System.lineSeparator();
+        return employee.getName() + ";"
+                + employee.getHired().getTime() + ";"
+                + (employee.getFired() == null ? "-" : employee.getFired().getTime()) + ";"
+                + employee.getSalary() + " rubles;" + System.lineSeparator();
     }
 
     public String end() {

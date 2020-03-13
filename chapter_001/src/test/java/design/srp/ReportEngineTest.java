@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.*;
 import java.util.function.Predicate;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Assert;
 
 /**
  * Class to test class ReportEngine.
@@ -83,14 +83,14 @@ public class ReportEngineTest {
     public void generateReportForHr() {
         ReportView rv = new ReportEngineHr(store);
         String report = rv.generate(predicate);
-        String expected = "Name; Salary;" + System.lineSeparator() +
-                employee2.getName() + ";" +
-                employee2.getSalary() + ";" + System.lineSeparator() +
-                employee1.getName() + ";" +
-                employee1.getSalary() + ";" + System.lineSeparator() +
-                employee3.getName() + ";" +
-                employee3.getSalary() + ";" + System.lineSeparator();
-        assertEquals(expected, report);
+        String expected = "Name; Salary;" + System.lineSeparator()
+                + employee2.getName() + ";"
+                + employee2.getSalary() + ";" + System.lineSeparator()
+                + employee1.getName() + ";"
+                + employee1.getSalary() + ";" + System.lineSeparator()
+                + employee3.getName() + ";"
+                + employee3.getSalary() + ";" + System.lineSeparator();
+        Assert.assertEquals(expected, report);
     }
 
     /**
@@ -100,20 +100,20 @@ public class ReportEngineTest {
     public void generateReportForAccounting() {
         ReportView rv = new ReportEngineAccounting(store);
         String report = rv.generate(predicate);
-        String expected = "Name; Hired; Fired; Salary;" + System.lineSeparator() +
-                employee1.getName() + ";" +
-                employee1.getHired().getTime() + ";" +
-                (employee1.getFired() == null ? "-" : employee1.getFired().getTime()) + ";" +
-                employee1.getSalary() + " rubles;" + System.lineSeparator() +
-                employee2.getName() + ";" +
-                employee2.getHired().getTime() + ";" +
-                (employee2.getFired() == null ? "-" : employee2.getFired().getTime()) + ";" +
-                employee2.getSalary() + " rubles;" + System.lineSeparator() +
-                employee3.getName() + ";" +
-                employee3.getHired().getTime() + ";" +
-                (employee3.getFired() == null ? "-" : employee3.getFired().getTime()) + ";" +
-                employee3.getSalary() + " rubles;" + System.lineSeparator();
-        assertEquals(expected, report);
+        String expected = "Name; Hired; Fired; Salary;" + System.lineSeparator()
+                + employee1.getName() + ";"
+                + employee1.getHired().getTime() + ";"
+                + (employee1.getFired() == null ? "-" : employee1.getFired().getTime()) + ";"
+                + employee1.getSalary() + " rubles;" + System.lineSeparator()
+                + employee2.getName() + ";"
+                + employee2.getHired().getTime() + ";"
+                + (employee2.getFired() == null ? "-" : employee2.getFired().getTime()) + ";"
+                + employee2.getSalary() + " rubles;" + System.lineSeparator()
+                + employee3.getName() + ";"
+                + employee3.getHired().getTime() + ";"
+                + (employee3.getFired() == null ? "-" : employee3.getFired().getTime()) + ";"
+                + employee3.getSalary() + " rubles;" + System.lineSeparator();
+        Assert.assertEquals(expected, report);
     }
 
     /**
@@ -123,26 +123,26 @@ public class ReportEngineTest {
     public void generateReportForItHtml() {
         ReportView rv = new ReportEngineItHtml(store);
         String report = rv.generate(predicate);
-        String expected = "<html>" + System.lineSeparator() +
-                "<head>" + System.lineSeparator() +
-                "Name; Hired; Fired; Salary;" + System.lineSeparator() +
-                "</head>" + System.lineSeparator() +
-                "<body>" + System.lineSeparator() +
-                employee1.getName() + ";" +
-                employee1.getHired().getTime() + ";" +
-                (employee1.getFired() == null ? "-" : employee1.getFired().getTime()) + ";" +
-                employee1.getSalary() + ";" + System.lineSeparator() +
-                employee2.getName() + ";" +
-                employee2.getHired().getTime() + ";" +
-                (employee2.getFired() == null ? "-" : employee2.getFired().getTime()) + ";" +
-                employee2.getSalary() + ";" + System.lineSeparator() +
-                employee3.getName() + ";" +
-                employee3.getHired().getTime() + ";" +
-                (employee3.getFired() == null ? "-" : employee3.getFired().getTime()) + ";" +
-                employee3.getSalary() + ";" + System.lineSeparator() +
-                "</body>" + System.lineSeparator() +
-                "</html>" + System.lineSeparator();
-        assertEquals(expected, report);
+        String expected = "<html>" + System.lineSeparator()
+                + "<head>" + System.lineSeparator()
+                + "Name; Hired; Fired; Salary;" + System.lineSeparator()
+                + "</head>" + System.lineSeparator()
+                + "<body>" + System.lineSeparator()
+                + employee1.getName() + ";"
+                + employee1.getHired().getTime() + ";"
+                + (employee1.getFired() == null ? "-" : employee1.getFired().getTime()) + ";"
+                + employee1.getSalary() + ";" + System.lineSeparator()
+                + employee2.getName() + ";"
+                + employee2.getHired().getTime() + ";"
+                + (employee2.getFired() == null ? "-" : employee2.getFired().getTime()) + ";"
+                + employee2.getSalary() + ";" + System.lineSeparator()
+                + employee3.getName() + ";"
+                + employee3.getHired().getTime() + ";"
+                + (employee3.getFired() == null ? "-" : employee3.getFired().getTime()) + ";"
+                + employee3.getSalary() + ";" + System.lineSeparator()
+                + "</body>" + System.lineSeparator()
+                + "</html>" + System.lineSeparator();
+        Assert.assertEquals(expected, report);
     }
 
     /**
@@ -152,47 +152,47 @@ public class ReportEngineTest {
     public void generateReportForItJson() {
         ReportView rv = new ReportEngineItJson(store);
         String report = rv.generate(predicate);
-        String expected = '{' + System.lineSeparator() +
-                "\"employees\":[" + System.lineSeparator() +
-                '{' + System.lineSeparator() +
-                "\"Name\":" +
-                '"' + employee1.getName() + '"' +
-                ',' + System.lineSeparator() +
-                "\"Hired\":" +
-                '"' + employee1.getHired().getTime() + '"' +
-                ',' + System.lineSeparator() +
-                "\"Fired\":" +
-                '"' + (employee1.getFired() == null ? '-' : employee1.getFired().getTime()) + '"' +
-                ',' + System.lineSeparator() +
-                "\"Salary\":" + employee1.getSalary() + System.lineSeparator() +
-                "}," + System.lineSeparator() +
-                '{' + System.lineSeparator() +
-                "\"Name\":" +
-                '"' + employee2.getName() + '"' +
-                ',' + System.lineSeparator() +
-                "\"Hired\":" +
-                '"' + employee2.getHired().getTime() + '"' +
-                ',' + System.lineSeparator() +
-                "\"Fired\":" +
-                '"' + (employee2.getFired() == null ? '-' : employee2.getFired().getTime()) + '"' +
-                ',' + System.lineSeparator() +
-                "\"Salary\":" + employee2.getSalary() + System.lineSeparator() +
-                "}," + System.lineSeparator() +
-                '{' + System.lineSeparator() +
-                "\"Name\":" +
-                '"' + employee3.getName() + '"' +
-                ',' + System.lineSeparator() +
-                "\"Hired\":" +
-                '"' + employee3.getHired().getTime() + '"' +
-                ',' + System.lineSeparator() +
-                "\"Fired\":" +
-                '"' + (employee3.getFired() == null ? '-' : employee3.getFired().getTime()) + '"' +
-                ',' + System.lineSeparator() +
-                "\"Salary\":" + employee3.getSalary() + System.lineSeparator() +
-                "}" + System.lineSeparator() +
-                ']' + System.lineSeparator() +
-                '}' + System.lineSeparator();
-        assertEquals(expected, report);
+        String expected = '{' + System.lineSeparator()
+                + "\"employees\":[" + System.lineSeparator()
+                + '{' + System.lineSeparator()
+                + "\"Name\":"
+                + '"' + employee1.getName() + '"'
+                + ',' + System.lineSeparator()
+                + "\"Hired\":"
+                + '"' + employee1.getHired().getTime() + '"'
+                + ',' + System.lineSeparator()
+                + "\"Fired\":"
+                + '"' + (employee1.getFired() == null ? '-' : employee1.getFired().getTime()) + '"'
+                + ',' + System.lineSeparator()
+                + "\"Salary\":" + employee1.getSalary() + System.lineSeparator()
+                + "}," + System.lineSeparator()
+                + '{' + System.lineSeparator()
+                + "\"Name\":"
+                + '"' + employee2.getName() + '"'
+                + ',' + System.lineSeparator()
+                + "\"Hired\":"
+                + '"' + employee2.getHired().getTime() + '"'
+                + ',' + System.lineSeparator()
+                + "\"Fired\":"
+                + '"' + (employee2.getFired() == null ? '-' : employee2.getFired().getTime()) + '"'
+                + ',' + System.lineSeparator()
+                + "\"Salary\":" + employee2.getSalary() + System.lineSeparator()
+                + "}," + System.lineSeparator()
+                + '{' + System.lineSeparator()
+                + "\"Name\":"
+                + '"' + employee3.getName() + '"'
+                + ',' + System.lineSeparator()
+                + "\"Hired\":"
+                + '"' + employee3.getHired().getTime() + '"'
+                + ',' + System.lineSeparator()
+                + "\"Fired\":"
+                + '"' + (employee3.getFired() == null ? '-' : employee3.getFired().getTime()) + '"'
+                + ',' + System.lineSeparator()
+                + "\"Salary\":" + employee3.getSalary() + System.lineSeparator()
+                + "}" + System.lineSeparator()
+                + ']' + System.lineSeparator()
+                + '}' + System.lineSeparator();
+        Assert.assertEquals(expected, report);
     }
 
 
@@ -203,51 +203,51 @@ public class ReportEngineTest {
     public void generateReportForItXml() {
         ReportView rv = new ReportEngineItXml(store);
         String report = rv.generate(predicate);
-        String expected = "<?xml version=\"1.0\" encoding=\"WINDOWS-1251\"?>" + System.lineSeparator() +
-                "<employees>" + System.lineSeparator() +
-                "<employee>" + System.lineSeparator() +
-                "<Name>" + System.lineSeparator() +
-                employee1.getName() + System.lineSeparator() +
-                "</Name>" + System.lineSeparator() +
-                "<Hired>" + System.lineSeparator() +
-                employee1.getHired().getTime() + System.lineSeparator() +
-                "</Hired>" + System.lineSeparator() +
-                "<Fired>" + System.lineSeparator() +
-                (employee1.getFired() == null ? "-" : employee1.getFired().getTime()) + System.lineSeparator() +
-                "</Fired>" + System.lineSeparator() +
-                "<Salary>" + System.lineSeparator() +
-                employee1.getSalary() + System.lineSeparator() +
-                "</Salary>" + System.lineSeparator() +
-                "</employee>" + System.lineSeparator() +
-                "<employee>" + System.lineSeparator() +
-                "<Name>" + System.lineSeparator() +
-                employee2.getName() + System.lineSeparator() +
-                "</Name>" + System.lineSeparator() +
-                "<Hired>" + System.lineSeparator() +
-                employee2.getHired().getTime() + System.lineSeparator() +
-                "</Hired>" + System.lineSeparator() +
-                "<Fired>" + System.lineSeparator() +
-                (employee2.getFired() == null ? "-" : employee2.getFired().getTime()) + System.lineSeparator() +
-                "</Fired>" + System.lineSeparator() +
-                "<Salary>" + System.lineSeparator() +
-                employee2.getSalary() + System.lineSeparator() +
-                "</Salary>" + System.lineSeparator() +
-                "</employee>" + System.lineSeparator() +
-                "<employee>" + System.lineSeparator() +
-                "<Name>" + System.lineSeparator() +
-                employee3.getName() + System.lineSeparator() +
-                "</Name>" + System.lineSeparator() +
-                "<Hired>" + System.lineSeparator() +
-                employee3.getHired().getTime() + System.lineSeparator() +
-                "</Hired>" + System.lineSeparator() +
-                "<Fired>" + System.lineSeparator() +
-                (employee3.getFired() == null ? "-" : employee3.getFired().getTime()) + System.lineSeparator() +
-                "</Fired>" + System.lineSeparator() +
-                "<Salary>" + System.lineSeparator() +
-                employee3.getSalary() + System.lineSeparator() +
-                "</Salary>" + System.lineSeparator() +
-                "</employee>" + System.lineSeparator() +
-                "</employees>" + System.lineSeparator();
-        assertEquals(expected, report);
+        String expected = "<?xml version=\"1.0\" encoding=\"WINDOWS-1251\"?>" + System.lineSeparator()
+                + "<employees>" + System.lineSeparator()
+                + "<employee>" + System.lineSeparator()
+                + "<Name>" + System.lineSeparator()
+                + employee1.getName() + System.lineSeparator()
+                + "</Name>" + System.lineSeparator()
+                + "<Hired>" + System.lineSeparator()
+                + employee1.getHired().getTime() + System.lineSeparator()
+                + "</Hired>" + System.lineSeparator()
+                + "<Fired>" + System.lineSeparator()
+                + (employee1.getFired() == null ? "-" : employee1.getFired().getTime()) + System.lineSeparator()
+                + "</Fired>" + System.lineSeparator()
+                + "<Salary>" + System.lineSeparator()
+                + employee1.getSalary() + System.lineSeparator()
+                + "</Salary>" + System.lineSeparator()
+                + "</employee>" + System.lineSeparator()
+                + "<employee>" + System.lineSeparator()
+                + "<Name>" + System.lineSeparator()
+                + employee2.getName() + System.lineSeparator()
+                + "</Name>" + System.lineSeparator()
+                + "<Hired>" + System.lineSeparator()
+                + employee2.getHired().getTime() + System.lineSeparator()
+                + "</Hired>" + System.lineSeparator()
+                + "<Fired>" + System.lineSeparator()
+                + (employee2.getFired() == null ? "-" : employee2.getFired().getTime()) + System.lineSeparator()
+                + "</Fired>" + System.lineSeparator()
+                + "<Salary>" + System.lineSeparator()
+                + employee2.getSalary() + System.lineSeparator()
+                + "</Salary>" + System.lineSeparator()
+                + "</employee>" + System.lineSeparator()
+                + "<employee>" + System.lineSeparator()
+                + "<Name>" + System.lineSeparator()
+                + employee3.getName() + System.lineSeparator()
+                + "</Name>" + System.lineSeparator()
+                + "<Hired>" + System.lineSeparator()
+                + employee3.getHired().getTime() + System.lineSeparator()
+                + "</Hired>" + System.lineSeparator()
+                + "<Fired>" + System.lineSeparator()
+                + (employee3.getFired() == null ? "-" : employee3.getFired().getTime()) + System.lineSeparator()
+                + "</Fired>" + System.lineSeparator()
+                + "<Salary>" + System.lineSeparator()
+                + employee3.getSalary() + System.lineSeparator()
+                + "</Salary>" + System.lineSeparator()
+                + "</employee>" + System.lineSeparator()
+                + "</employees>" + System.lineSeparator();
+        Assert.assertEquals(expected, report);
     }
 }

@@ -33,25 +33,25 @@ public class ReportEngineItXml implements ReportView {
     }
 
     public String start() {
-        return "<?xml version=\"1.0\" encoding=\"WINDOWS-1251\"?>" + System.lineSeparator() +
-                "<employees>" + System.lineSeparator();
+        return "<?xml version=\"1.0\" encoding=\"WINDOWS-1251\"?>" + System.lineSeparator()
+                + "<employees>" + System.lineSeparator();
     }
 
     public String row(Employee employee) {
-        return "<employee>" + System.lineSeparator() +
-                "<Name>" + System.lineSeparator() +
-                employee.getName() + System.lineSeparator() +
-                "</Name>" + System.lineSeparator() +
-                "<Hired>" + System.lineSeparator() +
-                employee.getHired().getTime() + System.lineSeparator() +
-                "</Hired>" + System.lineSeparator() +
-                "<Fired>" + System.lineSeparator() +
-                (employee.getFired() == null ? "-" : employee.getFired().getTime()) + System.lineSeparator() +
-                "</Fired>" + System.lineSeparator() +
-                "<Salary>" + System.lineSeparator() +
-                employee.getSalary() + System.lineSeparator() +
-                "</Salary>" + System.lineSeparator() +
-                "</employee>" + System.lineSeparator();
+        return "<employee>" + System.lineSeparator()
+                + "<Name>" + System.lineSeparator()
+                + employee.getName() + System.lineSeparator()
+                + "</Name>" + System.lineSeparator()
+                + "<Hired>" + System.lineSeparator()
+                + employee.getHired().getTime() + System.lineSeparator()
+                + "</Hired>" + System.lineSeparator()
+                + "<Fired>" + System.lineSeparator()
+                + (employee.getFired() == null ? "-" : employee.getFired().getTime()) + System.lineSeparator()
+                + "</Fired>" + System.lineSeparator()
+                + "<Salary>" + System.lineSeparator()
+                + employee.getSalary() + System.lineSeparator()
+                + "</Salary>" + System.lineSeparator()
+                + "</employee>" + System.lineSeparator();
     }
 
     public String end() {

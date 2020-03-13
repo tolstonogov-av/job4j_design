@@ -39,8 +39,8 @@ public class ReportEngineHr implements ReportView {
     }
 
     public String row(Employee employee) {
-        return employee.getName() + ";" +
-                employee.getSalary() + ";" + System.lineSeparator();
+        return employee.getName() + ";"
+                + employee.getSalary() + ";" + System.lineSeparator();
     }
 
     public String end() {
