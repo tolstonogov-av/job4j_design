@@ -3,4 +3,4 @@
  *  classes: Employee, ReportEngineAccounting, ReportEngineHr, ReportEngineItHtml, ReportEngineItJson, ReportEngineItXml.
  *  interfaces: Store, ReportView.
  */
-package design.srp;
+package ru.job4j.design.srp;

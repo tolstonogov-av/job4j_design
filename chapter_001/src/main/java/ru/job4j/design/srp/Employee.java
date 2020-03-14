@@ -1,4 +1,4 @@
-package design.srp;
+package ru.job4j.design.srp;
 
 import java.util.Calendar;
 import java.util.Objects;

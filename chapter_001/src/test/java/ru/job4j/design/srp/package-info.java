@@ -2,4 +2,4 @@
  * Package for:
  *  classes: ReportEngineTest.
  */
-package design.srp;
+package ru.job4j.design.srp;

@@ -1,13 +1,14 @@
-package design.srp;
+package ru.job4j.design.srp;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Class for generating reports for accounting.
+ * Class for generating reports for HR.
  *
  * @author Job4j, Tolstonogov Alexey
  */
-public class ReportEngineAccounting implements ReportView {
+public class ReportEngineHr implements ReportView {
     /**
      * Store with employees's data.
      */
@@ -18,28 +19,28 @@ public class ReportEngineAccounting implements ReportView {
      *
      * @param store store
      */
-    public ReportEngineAccounting(Store store) {
+    public ReportEngineHr(Store store) {
         this.store = store;
     }
 
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
         text.append(start());
-        for (Employee employee : store.findBy(filter)) {
+        List<Employee> employees = store.findBy(filter);
+        employees.sort((o1, o2) -> (int) (o2.getSalary() - o1.getSalary()));
+        for (Employee employee : employees) {
             text.append(row(employee));
         }
         return text.toString();
     }
 
     public String start() {
-        return "Name; Hired; Fired; Salary;" + System.lineSeparator();
+        return "Name; Salary;" + System.lineSeparator();
     }
 
     public String row(Employee employee) {
         return employee.getName() + ";"
-                + employee.getHired().getTime() + ";"
-                + (employee.getFired() == null ? "-" : employee.getFired().getTime()) + ";"
-                + employee.getSalary() + " rubles;" + System.lineSeparator();
+                + employee.getSalary() + ";" + System.lineSeparator();
     }
 
     public String end() {

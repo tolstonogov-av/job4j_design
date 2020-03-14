@@ -1,4 +1,4 @@
-package calculator;
+package ru.job4j.calculator;
 
 /**
  * Class for calculate operation between two numbers (operands).

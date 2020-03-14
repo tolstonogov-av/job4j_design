@@ -1,4 +1,4 @@
-package calculator;
+package ru.job4j.calculator;
 
 /**
  * Interface for input by user and by tests.

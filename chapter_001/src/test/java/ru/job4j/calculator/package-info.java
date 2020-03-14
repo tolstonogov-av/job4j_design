@@ -5,4 +5,4 @@
  * @author Tolstonogov Alexey
  * @version 1.0
  */
-package calculator;
+package ru.job4j.calculator;

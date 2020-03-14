@@ -1,4 +1,4 @@
-package design.srp;
+package ru.job4j.design.srp;
 
 import org.junit.Test;
 
