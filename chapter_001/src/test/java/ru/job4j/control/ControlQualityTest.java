@@ -1,5 +1,6 @@
 package ru.job4j.control;
 
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -21,17 +22,12 @@ import java.util.GregorianCalendar;
  */
 public class ControlQualityTest {
     /**
-     * Test current day.
-     */
-    private final Calendar today = new GregorianCalendar(2020, Calendar.APRIL, 20);
-
-    /**
      * Curd with 87.8% expired term.
      */
     private final Curd curd = new Curd(
             "Vatrusha",
-            new GregorianCalendar(2020, Calendar.MAY, 1),
-            new GregorianCalendar(2020, Calendar.FEBRUARY, 1),
+            System.currentTimeMillis() - 878,
+            System.currentTimeMillis() + 122,
             100,
             9.5f);
 
@@ -40,8 +36,8 @@ public class ControlQualityTest {
      */
     private final Milk milk1 = new Milk(
             "Prostokvashino",
-            new GregorianCalendar(2020, Calendar.APRIL, 10),
-            new GregorianCalendar(2020, Calendar.APRIL, 1),
+            System.currentTimeMillis() - 2111,
+            System.currentTimeMillis() - 1111,
             55,
             0.93f);
 
@@ -50,8 +46,8 @@ public class ControlQualityTest {
      */
     private final Milk milk2 = new Milk(
             "Semenishna",
-            new GregorianCalendar(2020, Calendar.APRIL, 22),
-            new GregorianCalendar(2020, Calendar.APRIL, 17),
+            System.currentTimeMillis() - 60,
+            System.currentTimeMillis() + 40,
             50,
             1f);
 
@@ -60,50 +56,37 @@ public class ControlQualityTest {
      */
     private final Orange orange = new Orange(
             "Egypt",
-            new GregorianCalendar(2020, Calendar.AUGUST, 1),
-            new GregorianCalendar(2020, Calendar.APRIL, 1),
+            System.currentTimeMillis() - 156,
+            System.currentTimeMillis() + 844,
             150,
             65);
 
     /**
-     * Trash for Liskov distribution.
+     * Trash for  distribution.
      */
-    private final Trash trashLiskov = new Trash("Tolstonogov Alexey");
+    private final Trash trash = new Trash("Tolstonogov Alexey");
 
     /**
-     * Shop for Liskov distribution.
+     * Shop for distribution.
      */
-    private final Shop shopLiskov = new Shop("Krasnoyarsk");
+    private final Shop shop = new Shop("Krasnoyarsk");
 
     /**
-     * Warehouse for Liskov distribution.
+     * Warehouse for distribution.
      */
-    private final Warehouse warehouseLiskov = new Warehouse(300);
+    private final Warehouse warehouse = new Warehouse(300);
 
     /**
-     * Distribution to Liskov storages.
+     * Distribution to storages.
      */
-    private final ControlQuality cqLiskov = new ControlQuality(trashLiskov, shopLiskov, warehouseLiskov);
+    private final ControlQuality cq = new ControlQuality();
 
-    /**
-     * Trash for not Liskov distribution.
-     */
-    private final Trash trashNotLiskov = new Trash("Tolstonogov Alexey");
-
-    /**
-     * Shop for not Liskov distribution.
-     */
-    private final Shop shopNotLiskov = new Shop("Krasnoyarsk");
-
-    /**
-     * Warehouse for not Liskov distribution.
-     */
-    private final Warehouse warehouseNotLiskov = new Warehouse(300);
-
-    /**
-     * Distribution to not Liskov storages.
-     */
-    private final ControlQuality cqNotLiskov = new ControlQuality(trashNotLiskov, shopNotLiskov, warehouseNotLiskov);
+    @Before
+    public void setBefore() {
+        cq.addStorage(trash);
+        cq.addStorage(shop);
+        cq.addStorage(warehouse);
+    }
 
     /**
      *             ---
@@ -118,17 +101,35 @@ public class ControlQualityTest {
      *             ---
      */
     @Test
-    public void whenDistributeCurdThenDistributedToShopAndDiscount10() {
-        cqLiskov.distributionLiskov(curd, today);
-        Curd curdLiskov = (Curd) shopLiskov.getLastItem();
+    public void whenDistributeCurdThenDistributedAndDiscount10() {
+        cq.distribution(curd);
         Curd curdExpected = new Curd(
                 "Vatrusha",
-                new GregorianCalendar(2020, Calendar.MAY, 1),
-                new GregorianCalendar(2020, Calendar.FEBRUARY, 1),
+                System.currentTimeMillis() - 878,
+                System.currentTimeMillis() + 122,
                 100,
                 9.5f);
         curdExpected.setDiscount(10);
-        assertEquals(curdExpected, curdLiskov);
+        assertEquals(curdExpected, curd);
+    }
+
+    /**
+     *             ---
+     * trash
+     *             100
+     * shop - 10%       <- curd 87.8%
+     *             75
+     * shop
+     *             25
+     * warehouse
+     *             0
+     *             ---
+     */
+    @Test
+    public void whenDistributeCurdThenDistributedToShop() {
+        cq.distribution(curd);
+        Curd curdExpected = (Curd) shop.getLastItem();
+        assertEquals(curdExpected, curd);
     }
 
     /**
@@ -145,9 +146,9 @@ public class ControlQualityTest {
      */
     @Test
     public void whenDistributeMilk1ThenDistributedToTrash() {
-        cqLiskov.distributionLiskov(milk1, today);
-        Milk milk1Liskov = (Milk) trashLiskov.getLastItem();
-        assertEquals(milk1, milk1Liskov);
+        cq.distribution(milk1);
+        Milk milk1Expected = (Milk) trash.getLastItem();
+        assertEquals(milk1Expected, milk1);
     }
 
     /**
@@ -164,9 +165,9 @@ public class ControlQualityTest {
      */
     @Test
     public void whenDistributeMilk2ThenDistributedToShop() {
-        cqLiskov.distributionLiskov(milk2, today);
-        Milk milk2Liskov = (Milk) shopLiskov.getLastItem();
-        assertEquals(milk2, milk2Liskov);
+        cq.distribution(milk2);
+        Milk milk2Expected = (Milk) shop.getLastItem();
+        assertEquals(milk2Expected, milk2);
     }
 
     /**
@@ -183,64 +184,8 @@ public class ControlQualityTest {
      */
     @Test
     public void whenDistributeOrangeThenDistributedToWarehouse() {
-        cqLiskov.distributionLiskov(orange, today);
-        Orange orangeLiskov = (Orange) warehouseLiskov.getLastItem();
-        assertEquals(orange, orangeLiskov);
-    }
-
-    /**
-     *   curd -> Liskov distribution      -> Shop - 10%
-     *
-     *   curd -> not Liskov distribution  -> Shop - 10%
-     */
-    @Test
-    public void whenDistributeCurdThenLiskovAndNotLiskovDistributedToShopAndDiscount10() {
-        cqLiskov.distributionLiskov(curd, today);
-        Curd curdLiskov = (Curd) shopLiskov.getLastItem();
-        cqNotLiskov.distributionNoLiskov(curd, today);
-        Curd curdNotLiskov = (Curd) shopNotLiskov.getLastItem();
-        assertEquals(curdNotLiskov, curdLiskov);
-    }
-
-    /**
-     *   milk1 -> Liskov distribution      -> Trash
-     *
-     *   milk1 -> not Liskov distribution  -> Trash
-     */
-    @Test
-    public void whenDistributeMilk1ThenLiskovAndNotLiskovDistributedToTrash() {
-        cqLiskov.distributionLiskov(milk1, today);
-        Milk milk1Liskov = (Milk) trashLiskov.getLastItem();
-        cqNotLiskov.distributionNoLiskov(milk1, today);
-        Milk milk1NotLiskov = (Milk) trashNotLiskov.getLastItem();
-        assertEquals(milk1NotLiskov, milk1Liskov);
-    }
-
-    /**
-     *   milk2 -> Liskov distribution      -> Shop
-     *
-     *   milk2 -> not Liskov distribution  -> Shop
-     */
-    @Test
-    public void whenDistributeMilk2ThenLiskovAndNotLiskovDistributedToShop() {
-        cqLiskov.distributionLiskov(milk2, today);
-        Milk milk2Liskov = (Milk) shopLiskov.getLastItem();
-        cqNotLiskov.distributionNoLiskov(milk2, today);
-        Milk milk2NotLiskov = (Milk) shopNotLiskov.getLastItem();
-        assertEquals(milk2NotLiskov, milk2Liskov);
-    }
-
-    /**
-     *   orange -> Liskov distribution      -> Warehouse
-     *
-     *   orange -> not Liskov distribution  -> Warehouse
-     */
-    @Test
-    public void whenDistributeOrangeThenLiskovAndNotLiskovDistributedToWarehouse() {
-        cqLiskov.distributionLiskov(orange, today);
-        Orange orangeLiskov = (Orange) warehouseLiskov.getLastItem();
-        cqNotLiskov.distributionNoLiskov(orange, today);
-        Orange orangeNotLiskov = (Orange) warehouseNotLiskov.getLastItem();
-        assertEquals(orangeNotLiskov, orangeLiskov);
+        cq.distribution(orange);
+        Orange orangeExpected = (Orange) warehouse.getLastItem();
+        assertEquals(orangeExpected, orange);
     }
 }

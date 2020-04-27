@@ -15,8 +15,8 @@ public class Curd extends AbstractFood {
      */
     private final float fatContent;
 
-    public Curd(String name, Calendar expirationDate, Calendar createDate, double price, float fatContent) {
-        super(name, expirationDate, createDate, price);
+    public Curd(String name, long createDate, long expirationDate, double price, float fatContent) {
+        super(name, createDate, expirationDate, price);
         this.fatContent = fatContent;
     }
 

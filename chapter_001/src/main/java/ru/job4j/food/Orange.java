@@ -15,8 +15,8 @@ public class Orange extends AbstractFood {
      */
     private final int minDiameter;
 
-    public Orange(String name, Calendar expirationDate, Calendar createDate, double price, int minDiameter) {
-        super(name, expirationDate, createDate, price);
+    public Orange(String name, long createDate, long expirationDate, double price, int minDiameter) {
+        super(name, createDate, expirationDate, price);
         this.minDiameter = minDiameter;
     }
 

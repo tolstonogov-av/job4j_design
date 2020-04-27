@@ -16,14 +16,14 @@ public abstract class AbstractFood {
     private final String name;
 
     /**
-     * The expiration date of food.
-     */
-    private final Calendar expirationDate;
-
-    /**
      * Date of creation food.
      */
-    private final Calendar createDate;
+    private final long createDate;
+
+    /**
+     * The expiration date of food.
+     */
+    private final long expirationDate;
 
     /**
      * Actual price.
@@ -35,7 +35,7 @@ public abstract class AbstractFood {
      */
     private double discount;
 
-    public AbstractFood(String name, Calendar expirationDate, Calendar createDate, double price) {
+    public AbstractFood(String name, long createDate, long expirationDate, double price) {
         this.name = name;
         this.expirationDate = expirationDate;
         this.createDate = createDate;
@@ -55,21 +55,26 @@ public abstract class AbstractFood {
             return false;
         }
         AbstractFood that = (AbstractFood) o;
-        return Double.compare(that.price, price) == 0
+        return createDate == that.createDate
+                && expirationDate == that.expirationDate
+                && Double.compare(that.price, price) == 0
                 && Double.compare(that.discount, discount) == 0
-                && name.equals(that.name)
-                && expirationDate.equals(that.expirationDate)
-                && createDate.equals(that.createDate);
+                && name.equals(that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, expirationDate, createDate, price, discount);
+        return Objects.hash(name, createDate, expirationDate, price, discount);
     }
 
-    public float usedTerm(Calendar today) {
-        long used = today.getTimeInMillis() - createDate.getTimeInMillis();
-        long live = expirationDate.getTimeInMillis() - createDate.getTimeInMillis();
+    /**
+     * Calculates how much of the expiration date is used.
+     *
+     * @return how much of the expiration date is used in percent
+     */
+    public float usedTerm() {
+        long used = System.currentTimeMillis() - createDate;
+        long live = expirationDate - createDate;
         return (float) used / live * 100;
     }
 }

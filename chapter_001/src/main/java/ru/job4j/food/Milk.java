@@ -15,8 +15,8 @@ public class Milk extends AbstractFood {
      */
     private final float volume;
 
-    public Milk(String name, Calendar expirationDate, Calendar createDate, double price, float volume) {
-        super(name, expirationDate, createDate, price);
+    public Milk(String name, long createDate, long expirationDate, double price, float volume) {
+        super(name, createDate, expirationDate, price);
         this.volume = volume;
     }
 

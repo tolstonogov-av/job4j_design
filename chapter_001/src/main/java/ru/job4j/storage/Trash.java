@@ -1,5 +1,9 @@
 package ru.job4j.storage;
 
+import ru.job4j.food.AbstractFood;
+
+import java.util.Calendar;
+
 /**
  * Class for trash.
  *
@@ -18,5 +22,10 @@ public class Trash extends AbstractStorage {
 
     public String getDirector() {
         return director;
+    }
+
+    @Override
+    public boolean isRelevant(AbstractFood food) {
+        return food.usedTerm() > 100;
     }
 }

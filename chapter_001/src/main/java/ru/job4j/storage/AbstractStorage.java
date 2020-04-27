@@ -3,6 +3,7 @@ package ru.job4j.storage;
 import ru.job4j.food.AbstractFood;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -25,6 +26,14 @@ public abstract class AbstractStorage {
     public void addItem(AbstractFood food) {
         storage.add(food);
     }
+
+    /**
+     * Determines whether specified food is relevant for this storage.
+     *
+     * @param food checked food
+     * @return result of check
+     */
+    public abstract boolean isRelevant(AbstractFood food);
 
     /**
      * Returns last element of storage.

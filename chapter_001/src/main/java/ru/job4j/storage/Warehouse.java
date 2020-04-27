@@ -1,5 +1,9 @@
 package ru.job4j.storage;
 
+import ru.job4j.food.AbstractFood;
+
+import java.util.Calendar;
+
 /**
  * Class for warehouse.
  *
@@ -18,5 +22,10 @@ public class Warehouse extends AbstractStorage {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    @Override
+    public boolean isRelevant(AbstractFood food) {
+        return food.usedTerm() <= 25;
     }
 }
