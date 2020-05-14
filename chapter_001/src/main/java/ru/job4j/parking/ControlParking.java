@@ -29,8 +29,8 @@ public interface ControlParking {
     /**
      * Searches and removes the specified car from parkings in inner storage.
      *
-     * @param car  specified car
+     * @param lpn licence plate number of car to remove
      * @return result of operation, false if not found car, true if car is in the parkings
      */
-    boolean giveCar(Car car);
+    boolean giveCar(String lpn);
 }

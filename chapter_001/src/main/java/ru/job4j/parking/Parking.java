@@ -18,9 +18,9 @@ public interface Parking {
     /**
      * Check whether the specified car is on parking.
      *
-     * @param car car to searching
+     * @param lpn licence plate number of car
      */
-    boolean hasCar(Car car);
+    boolean hasCar(String lpn);
 
     /**
      * Adds specified car to parking.
@@ -32,9 +32,9 @@ public interface Parking {
     /**
      * Removes specified car from parking.
      *
-     * @param car car to remove
+     * @param lpn licence plate number of car to remove
      */
-    void removeCar(Car car);
+    void removeCar(String lpn);
 
     /**
      * Shows the last added car.
