@@ -1,5 +1,7 @@
 package ru.job4j.parking;
 
+import java.util.Objects;
+
 /**
  * Universal class for lorry and passenger car.
  *
@@ -24,11 +26,28 @@ public class SimpleCar implements Car {
 
     @Override
     public int getSize() {
-        return 0;
+        return this.size;
     }
 
     @Override
     public String getLpn() {
-        return null;
+        return this.lpn;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SimpleCar simpleCar = (SimpleCar) o;
+        return lpn.equals(simpleCar.lpn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lpn);
     }
 }
