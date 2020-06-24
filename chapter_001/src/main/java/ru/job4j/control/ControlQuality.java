@@ -10,7 +10,7 @@ import java.util.List;
  * Class for distribution food to different storages.
  *
  * @author Tolstonogov Alexey
- * @version 1.0
+ * @version 2.0
  */
 public class ControlQuality {
     /**
@@ -38,6 +38,42 @@ public class ControlQuality {
                 storage.addItem(food);
                 break;
             }
+        }
+    }
+
+    /**
+     * Redistributes all food from all storage.
+     */
+    public void revert() {
+        this.enter(this.extract());
+    }
+
+    /**
+     * Extracts all food from all storages.
+     *
+     * @return all extracted food
+     */
+    private List<AbstractFood> extract() {
+        List<AbstractFood> result = new ArrayList<>();
+        AbstractFood food;
+        for (AbstractStorage storage : storages) {
+            food = storage.extractLastItem();
+            while (food != null) {
+                result.add(food);
+                food = storage.extractLastItem();
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Distributes specified foods into storages.
+     *
+     * @param foods foods to distribute
+     */
+    private void enter(List<AbstractFood> foods) {
+        for (AbstractFood food : foods) {
+            this.distribution(food);
         }
     }
 }
